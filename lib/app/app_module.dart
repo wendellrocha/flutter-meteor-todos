@@ -1,4 +1,5 @@
 import 'package:note/app/login/login_module.dart';
+import 'package:note/app/new_note/new_note_module.dart';
 import 'package:note/app/notes/notes_module.dart';
 import 'package:note/app/splash/splash_module.dart';
 
@@ -19,7 +20,8 @@ class AppModule extends MainModule {
         Router(Modular.initialRoute, module: HomeModule()),
         Router('/notes', module: NotesModule()),
         Router('/splash', module: SplashModule()),
-        Router('/login', module: LoginModule())
+        Router('/login', module: LoginModule()),
+        Router('/new-note', module: NewNoteModule()),
       ];
 
   @override

@@ -1,5 +1,6 @@
 import 'package:enhanced_meteorify/enhanced_meteorify.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:note/main.dart';
 import 'package:note/models/task_model.dart';
 
@@ -45,17 +46,23 @@ class _NotesPageState extends State<NotesPage> {
               _doc.add(_obj(item['id'], item));
             });
             return _doc != null
-                ? _tasks(_doc, context)
+                ? _tasks(_doc.reversed.toList(), context)
                 : Container(child: Text('Sem notas'));
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Modular.to.pushNamed('/new-note');
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
 
   _tasks(tasks, context) {
     return Container(
-      child: Row(
+      child: Column(
         children: <Widget>[
           Expanded(
             child: ListView.builder(
@@ -87,30 +94,33 @@ class _NotesPageState extends State<NotesPage> {
           ),
         ),
       ),
-      child: Expanded(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                task['text'],
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  task['text'],
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                task['username'],
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                softWrap: true,
-                textAlign: TextAlign.left,
-              )
-            ],
+                Text(
+                  task['username'],
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  textAlign: TextAlign.left,
+                )
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

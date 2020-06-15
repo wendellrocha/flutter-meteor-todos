@@ -1,0 +1,5 @@
+lib/app/new_task/new_task_module.dart
+lib/app/new_task/new_task_page.dart
+test/app/new_task/new_task_page_test.dart
+lib/app/new_task/new_task_bloc.dart
+test/app/new_task/new_task_bloc_test.dart
